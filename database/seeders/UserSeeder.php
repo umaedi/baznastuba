@@ -20,5 +20,18 @@ class UserSeeder extends Seeder
             'email'     => 'devkh@gmail.com',
             'password'  => Hash::make('devkh123'),
         ]);
+
+        $donaturs = [
+            ['name' => 'muzaki1', 'email', 'muzaki1@gmail.com', 'password' => Hash::make('muzaki1')],
+            ['name' => 'muzaki2', 'email', 'muzaki2@gmail.com', 'password' => Hash::make('muzaki2')],
+            ['name' => 'muzaki3', 'email', 'muzaki3@gmail.com', 'password' => Hash::make('muzaki3')],
+            ['name' => 'muzaki4', 'email', 'muzaki4@gmail.com', 'password' => Hash::make('muzaki4')],
+            ['name' => 'muzaki5', 'email', 'muzaki5@gmail.com', 'password' => Hash::make('muzaki5')],
+            ['name' => 'muzaki6', 'email', 'muzaki6@gmail.com', 'password' => Hash::make('muzaki6')],
+        ];
+
+        foreach ($donaturs as  $value) {
+            \App\Models\Donatur::create([$value]);
+        }
     }
 }
