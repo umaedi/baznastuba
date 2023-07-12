@@ -17,7 +17,7 @@ class DonationController extends Controller
     {
         return view('admin.donation.index');
     }
-    
+
     /**
      * filter
      *
@@ -39,7 +39,27 @@ class DonationController extends Controller
 
         //get total donation by range date    
         $total = Donation::where('status', 'success')->whereDate('created_at', '>=', $request->date_from)->whereDate('created_at', '<=', $request->date_to)->sum('amount');
-        
+
         return view('admin.donation.index', compact('donations', 'total'));
+    }
+
+    public function donation()
+    {
+        $konfirmasi = Donation::where('status', 'pending')->paginate();
+        return view('admin.donation.konfirmasi', compact('konfirmasi'));
+    }
+
+    public function konfirmasi(Request $request)
+    {
+        $donation = Donation::findOrfail($request->id);
+        $donation->update(['status' =>  'success']);
+
+        if ($donation) {
+            //redirect dengan pesan sukses
+            return redirect()->route('admin.donation.konfirmasi')->with(['success' => 'Data Berhasil Diupdate!']);
+        } else {
+            //redirect dengan pesan error
+            return redirect()->route('admin.donation.konfirmasi')->with(['error' => 'Data Gagal Diupdate!']);
+        }
     }
 }

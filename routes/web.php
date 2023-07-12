@@ -17,13 +17,13 @@ Route::get('/', function () {
 Route::prefix('admin')->group(function () {
 
     //group route with middleware "auth"
-    Route::group(['middleware' => 'auth'], function() {
+    Route::group(['middleware' => 'auth'], function () {
 
         //route dashboard
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard.index');
 
         //route resource categories
-        Route::resource('/category', CategoryController::class,['as' => 'admin']);
+        Route::resource('/category', CategoryController::class, ['as' => 'admin']);
 
         //route resource campaign
         Route::resource('/campaign', CampaignController::class, ['as' => 'admin']);
@@ -34,6 +34,8 @@ Route::prefix('admin')->group(function () {
         //route donation
         Route::get('/donation', [DonationController::class, 'index'])->name('admin.donation.index');
         Route::get('/donation/filter', [DonationController::class, 'filter'])->name('admin.donation.firter');
+        Route::get('/donation/konfirmasi', [DonationController::class, 'donation'])->name('admin.donation.konfirmasi');
+        Route::post('/donation/konfirmasi', [DonationController::class, 'konfirmasi']);
 
         //route profile
         Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile.index');
